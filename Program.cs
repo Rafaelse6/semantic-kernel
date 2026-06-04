@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Demo03.Plugins;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
@@ -14,6 +15,8 @@ builder.Services.AddLogging(services => services.AddConsole().SetMinimumLevel(Lo
 
 var kernel = builder.Build();
 var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
+
+kernel.Plugins.AddFromType<ProductPlugin>("Products");
 
 OllamaPromptExecutionSettings settings = new()
 {
